@@ -77,7 +77,7 @@ mean(pred==forest_test$fire)
 library(neuralnet)
 
 net <- neuralnet(fire~temp+RH+wind+rain, 
-                 data=forest_train, hidden=10, algorithm ="rprop+", 
+                 data=forest_train, hidden=2, algorithm ="rprop+", 
                  err.fct = "sse", act.fct = "logistic", 
                  rep = 1, stepmax = 1e06, threshold = 0.01, linear.output = F)
 
@@ -100,9 +100,9 @@ head(pred2,5)
 ## Create a categorical predicted value 
 predcat <-ifelse(pred2<0.5, 0,1)
 
-###Classification table 70%
+###Classification table
 table(predcat, forest_test$fire)
 mean(predcat==forest_test$fire)
-
+ #54%
 
 
